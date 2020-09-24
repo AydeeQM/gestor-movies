@@ -1,26 +1,19 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Suspense } from 'react'
+import { GlobalStyle } from 'styles/GlobalStyles'
+import 'assets/icomoon/style.css'
+import { Router } from '@reach/router'
 
-function App() {
+const Dashboard = React.lazy(() => import('./pages/Dashboard'))
+
+function App () {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <Suspense fallback={<div />}>
+      <GlobalStyle />
+      <Router>
+        <Dashboard path='/' />
+      </Router>
+    </Suspense>
+  )
 }
 
-export default App;
+export default App
